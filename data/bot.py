@@ -4,6 +4,8 @@ from telebot import types
 
 bot = telebot.TeleBot(config.TOKEN)
 
+print(config.bot_started)
+
 
 @bot.message_handler(commands=['start'])
 def opa(message):
@@ -30,6 +32,8 @@ def opa(message):
 @bot.message_handler()
 def text_from_user(messages):
     bot.send_message(messages.chat.id, messages, parse_mode='html')
+
+
 # @bot.message_handler(content_types=['text'])
 # def main_menu(message):
 #     if message.chat.type == 'private':

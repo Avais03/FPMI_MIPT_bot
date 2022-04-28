@@ -4,6 +4,5 @@ then
  	pip3 install -r ./data/req.txt
   	python3 -m venv env
   	touch true.txt
-    	./letsgo.sh
 fi
 python3 ./data/bot.py
