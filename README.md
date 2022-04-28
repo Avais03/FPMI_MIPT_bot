@@ -1,2 +1,12 @@
 # FPMI_MIPT_bot
-This bot gives some descriptions about FPMI and MIPT, and gives some ways how to enroll in MIPT
+
+Перед Вами реализация Телеграм-бота, который может расскзать много всего интересного
+о ФПМИ и о МФТИ, вчастности. Особо полезен этот бот будет для абитуриентов и их родителей
+
+## Запуск
+
+```
+chmod +x letsgo.sh
+
+./letsgo.sh
+```
