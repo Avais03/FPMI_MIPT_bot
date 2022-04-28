@@ -1,9 +1,9 @@
 if [ ! -f "true.txt" ]
 then
     #sudo apt install python3-pip -y
- 	pip3 install -r static/requirements.txt
+ 	pip3 install -r ./data/req.txt
   	python3 -m venv env
   	touch true.txt
-    ./letsgo.sh
+    	./letsgo.sh
 fi
-python3 bot.py
+python3 ./data/bot.py

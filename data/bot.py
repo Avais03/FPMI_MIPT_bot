@@ -23,7 +23,7 @@ def opa(message):
                      parse_mode='html')
 
     # send sticker
-    sticker = open('static/Potential.webp', 'rb')
+    sticker = open('data/static/Potential.webp', 'rb')
     bot.send_sticker(message.chat.id, sticker, reply_markup=markup)
 
 
