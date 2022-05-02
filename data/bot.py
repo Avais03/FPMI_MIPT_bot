@@ -1,49 +1,94 @@
-import telebot
-import config
-from telebot import types
+import aiogram
+import logging
+import service_code.config
 
-bot = telebot.TeleBot(config.TOKEN)
+from aiogram.dispatcher.filters import Command, Text
+from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
+from service_code import buttons as but
+from service_code import descriptions as desc
+from service_code import markups as mkps
 
-print(config.bot_started)
+
+# log level
+logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+                    level=logging.INFO,
+                    )
+print(service_code.config.bot_started)
+
+# bot init
+bot = aiogram.Bot(token=service_code.config.TOKEN)
+dp = aiogram.Dispatcher(bot)
 
 
-@bot.message_handler(commands=['start'])
-def opa(message):
-    # bot.send_message(message.chat.id, '<b>Ты хуле тут делаешь?</b>', parse_mode='html')
-    # for keyboard
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item0 = types.KeyboardButton("Общая информация🌞")
-    item1 = types.KeyboardButton("Программы обучения🚀")
-    item2 = types.KeyboardButton("Баллы прошлых лет👣")
-    item3 = types.KeyboardButton("Олимпиады🏆")
-    item4 = types.KeyboardButton("FAQ🌍")
-    markup.add(item0, item1, item4, item3, item2)
+@dp.message_handler(commands=['start'])
+async def command_start(message: Message):
+    # bot.send_message(message.chat.id, '<b>Ты че тут делаешь?</b>', parse_mode='html')
 
     # send greeting
-    bot.send_message(message.chat.id,
-                     config.greeting.format(message.from_user, bot.get_me()),
-                     parse_mode='html')
-
+    await message.answer(desc.greeting1.format(message.from_user),
+                         parse_mode='html')
     # send sticker
-    sticker = open('data/static/Potential.webp', 'rb')
-    bot.send_sticker(message.chat.id, sticker, reply_markup=markup)
+    sticker = open('static/Potential.webp', 'rb')
+    await bot.send_sticker(message.chat.id, sticker, reply_markup=mkps.mainMenu)
 
 
-@bot.message_handler()
-def text_from_user(messages):
-    bot.send_message(messages.chat.id, messages, parse_mode='html')
+@dp.message_handler(Text(equals=["Общая информация🌞", "Программы обучения🚀",
+                                 "Баллы прошлых лет👣", "Олимпиады🏆", "FAQ🌍"]))
+async def get_click(message: Message):
+    await message.answer(desc.menu_descriptions[message.text], reply_markup=but.inline_markups[message.text],
+                         parse_mode='Markdown')
 
 
-# @bot.message_handler(content_types=['text'])
-# def main_menu(message):
-#     if message.chat.type == 'private':
-#         if message.text == "Баллы прошлых лет👣":
-#             bot.send_message(message.chat.id, config.FPMI_message, parse_mode='html')
-#         elif message.text == "Олимпиады🏆":
-#
-#         elif message.text == "Общая информация🌞":
-#         elif message.text == "FAQ🌍":
-#         elif message.text == "Программы обучения🚀":
+# @dp.callback_query_handlers(service_code.button_processing.olympiads.filter(item_name=))
+# @dp.message_handler(Command("items"))
+# async def show_items(message : Message):
+#     await message.answer(reply_markup=choise)
+
+@dp.callback_query_handler(text_contains="bvi")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.bvi)
 
 
-bot.polling(none_stop=True)
+@dp.callback_query_handler(text_contains="ne_bvi")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.ne_bvi)
+
+
+@dp.callback_query_handler(text_contains="achievements")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.achievements)
+
+
+@dp.callback_query_handler(text_contains="2021")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.year_2021)
+
+
+@dp.callback_query_handler(text_contains="2020")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.year_2020)
+
+
+@dp.callback_query_handler(text_contains="2019")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.year_2019)
+
+
+@dp.callback_query_handler(text_contains="2018")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, desc.year_2018)
+
+
+@dp.callback_query_handler(text_contains="БВИ💪?")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, "Ну БВИ, так БВИ")
+
+
+@dp.callback_query_handler(text_contains="ИД🏅?")
+async def for_bvi(message: Message):
+    await bot.send_message(message.from_user.id, "Ну ИД, так ИД.")
+
+
+# run long-polling
+if __name__ == "__main__":
+    aiogram.executor.start_polling(dp, skip_updates=True)
