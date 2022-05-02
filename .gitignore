@@ -2,3 +2,4 @@
 data/service_code/__pycache__
 data/true.txt
 data/venv
+data/config.py

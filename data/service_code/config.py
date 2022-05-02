@@ -1,4 +1,4 @@
-TOKEN = '5286423171:AAG3iUkDBxT_xAElndhdwf9hFc1y9B5klr8'
+TOKEN = '5286423171:AAFMcI5gDyOlgQRACb-UFxq6z_ldIPdPLkk'
 admin_id = '693179947'
 bot_started = "\n************************************" \
               "\n***** WOOW WOoOW WOOW *****\n" \
