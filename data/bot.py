@@ -7,6 +7,7 @@ from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
 from service_code import buttons as but
 from service_code import descriptions as desc
 from service_code import markups as mkps
+from service_code.logs import log
 
 
 # log level
@@ -35,6 +36,7 @@ async def command_start(message: Message):
 @dp.message_handler(Text(equals=["Общая информация🌞", "Программы обучения🚀",
                                  "Баллы прошлых лет👣", "Олимпиады🏆", "FAQ🌍"]))
 async def get_click(message: Message):
+    log.append(message.from_user)
     await message.answer(desc.menu_descriptions[message.text], reply_markup=but.inline_markups[message.text],
                          parse_mode='Markdown')
 
