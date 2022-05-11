@@ -1,6 +1,11 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+years = ["2021", "2020", "2019", "2018"]
+olympiad = ["bvi", "ne_bvi", "achievements"]
+for_FAQs = ["БВИ💪?", "ИД🏅?"]
+
 empty_inline_markup = InlineKeyboardMarkup()
+
 olympiads = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -12,9 +17,7 @@ olympiads = InlineKeyboardMarkup(
         ]
     ]
 )
-years = ["2021", "2020", "2019", "2018"]
-olympiad = ["БВИ💪", "Не БВИ👌", "ИД🏅"]
-for_FAQs = ["БВИ💪?", "ИД🏅?"]
+
 scores = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -27,6 +30,7 @@ scores = InlineKeyboardMarkup(
         ]
     ]
 )
+
 for_FAQ = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -37,8 +41,15 @@ for_FAQ = InlineKeyboardMarkup(
         ],
     ]
 )
+
 inline_markups = {"Общая информация🌞": empty_inline_markup,
                   "Программы обучения🚀": empty_inline_markup,
                   "Баллы прошлых лет👣": scores,
                   "Олимпиады🏆": olympiads,
                   "FAQ🌍": for_FAQ}
+
+inline_markups_text = {"Общая информация🌞": [],
+                       "Программы обучения🚀": [],
+                       "Баллы прошлых лет👣": years,
+                       "Олимпиады🏆": olympiad,
+                       "FAQ🌍": for_FAQs}

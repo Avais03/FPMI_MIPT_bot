@@ -40,3 +40,12 @@ menu_descriptions = {"Общая информация🌞": FPMI_message,
                      "Баллы прошлых лет👣": scores,
                      "Олимпиады🏆": scores,
                      "FAQ🌍": for_FAQ}
+button_descriptions = {"2021": year_2021,
+                       "2020": year_2020,
+                       "2019": year_2019,
+                       "2018": year_2018,
+                       "bvi": bvi,
+                       "ne_bvi": ne_bvi,
+                       "achievements": achievements,
+                       "БВИ💪?": "Ну БВИ, так БВИ",
+                       "ИД🏅?": "Ну ИД, так ИД."}
